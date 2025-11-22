@@ -1,0 +1,41 @@
+// variables de colores
+$color-primary: #7b9ea8;
+$color-primary-dark: #658790;
+$color-accent: #9CAF88;
+$color-accent-dark: #829773;
+$color-rose: #CEA6A1;
+$color-bg: #faf9f6;
+$color-text: #1e1e1e;
+$color-text-light: #666;
+$color-white: #ffffff;
+
+// fuentes
+$font-main: 'Montserrat', sans-serif;
+$font-title: 'Cormorant Garamond', serif;
+$font-script: 'Tangerine', cursive;
+
+// medias queries
+$bp-tablet: 600px;
+$bp-desktop: 901px;
+$bp-large: 1100px;
+
+// estilos base
+body {
+    font-family: $font-main;
+    color: $color-text;
+    line-height: 1.6;
+    background-color: $color-bg;
+}
+
+h1, h2, h3 {
+    font-family: $font-title;
+    font-weight: 700;
+}
+h1 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

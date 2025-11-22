@@ -1,0 +1,250 @@
+//estilo de la cafeteria
+@use '../base/variables' as var;
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-family: var.$font-title;
+    color: var.$color-text;
+}
+
+.hero-cafe {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    color: var.$color-text;
+
+    &__bg {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        
+        img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center;
+        }
+    }
+
+
+    &__content {
+        position: relative;
+        z-index: 1;
+        max-width: 500px;
+        text-align: right;
+        align-self: flex-start;
+        margin-top: 2rem;
+        margin-left: auto;
+    }
+
+    &__title {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__text {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+    }
+
+    @media (min-width: var.$bp-desktop) {
+        justify-content: flex-end;
+        padding-right: 10%;
+        
+        &__content {
+            margin-top: 4rem;
+        }
+
+        &__title {
+            font-size: 4.5rem;
+        }
+    }
+}
+
+.features {
+    display: none;
+
+    @media (min-width: var.$bp-desktop) {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 3rem 5%;
+        background-color: var.$color-bg;
+        flex-wrap: wrap;
+        text-align: center;
+
+        &__item {
+            flex-basis: 20%;
+            min-width: 140px;
+
+            p {
+                font-size: 0.8rem;
+                margin-top: 10px;
+                color: var.$color-text-light;
+            }
+        }
+
+        &__icon {
+            font-size: 1.8rem;
+            color: var.$color-text;
+        }
+    }
+}
+
+.products-section {
+    padding: 4rem 5%;
+    background-color: var.$color-bg;
+
+    &__grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 30px;
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        align-items: stretch;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: var.$bp-desktop) {
+            justify-content: center;
+            overflow-x: visible;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 250px;
+    height: 100%;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: left;
+
+    .card-header {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        flex-shrink: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .heart-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: var.$color-bg;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.2s;
+        
+        &:active {
+            color: var.$color-rose;
+        }
+    }
+
+    .card-content {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        h4 {
+            font-family: var.$font-main;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: var.$color-rose;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: var.$color-text-light;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var.$color-text;
+            margin-bottom: 15px;
+            margin-top: auto;
+        }
+    }
+
+    .card-actions {
+        padding: 0 15px 15px 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+}
+
+.about-cafe {
+    display: flex;
+    flex-direction: column;
+    background-color: var.$color-rose;
+    color: var.$color-text;
+
+    @media (min-width: var.$bp-desktop) {
+        flex-direction: row;
+        min-height: 500px;
+    }
+
+    &__image {
+        flex: 1;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        @media (max-width: 900px) {
+            height: 300px;
+        }
+    }
+
+    &__content {
+        flex: 1;
+        padding: 3rem 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #E3D4D1;
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var.$color-text;
+        }
+
+        .about-cafe__subtitle {
+            display: block;
+            font-family: var.$font-script;
+            font-size: 2rem;
+            margin-top: -10px;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+    }
+}

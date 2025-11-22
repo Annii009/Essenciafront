@@ -24,7 +24,6 @@ const renderTartas = () => {
                 <div class="price">${tarta.precio_euros.toFixed(2).replace('.', ',')}€</div>
             </div>
             <div class="card-actions">
-                <button class="btn btn--outline-rose btn--small">Añadir</button>
                 <button class="btn btn--rose btn--small">Ver</button>
             </div>
         </div>
