@@ -54,4 +54,4 @@ Necesitarás un **navegador web moderno** y un entorno que compile **SCSS a CSS*
 ## 📧 Contacto
 
 * **Ana Hernandez Almudi** - anaheralmudi@gmail.com
-* **Enlace a mi página web:** https://anaalmudi.com/html/index.html
+* **Enlace a mi página web:** https://anaalmudi.com
