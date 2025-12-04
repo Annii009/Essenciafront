@@ -16,7 +16,6 @@ const createCoffeeCard = (producto) => {
             <div class="cafe-content">
                 <h4>${producto.nombre}</h4>
                 <p>${producto.descripcion}</p>
-                <div class="price">${producto.precio_euros.toFixed(2)}€</div>
                 <div class="cafe-actions">
                     <button class="btn btn--ver">Ver</button>
                 </div>

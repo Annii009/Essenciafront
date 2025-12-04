@@ -13,10 +13,16 @@
 
     &__bg {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%;
         z-index: -1;
         img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center;
         }
     }
 
@@ -72,6 +78,8 @@
 .catalog {
     padding: 3rem 5%;
     background-color: var.$color-bg;
+    max-width: 1200px;
+    margin: 0 auto;
 
     &__title {
         font-size: 2.5rem;
@@ -79,7 +87,9 @@
         margin-bottom: 3rem;
         font-weight: 700;
 
-        @media (min-width: var.$bp-desktop) { font-size: 4rem; }
+        @media (min-width: var.$bp-desktop) { 
+            font-size: 4rem; 
+        }
     }
 
     &__grid {
@@ -88,9 +98,15 @@
         gap: 2rem;
         justify-content: center;
 
-        @media (min-width: 500px) { justify-content: space-between; }
-        @media (min-width: 800px) { justify-content: space-between; }
-        @media (min-width: var.$bp-large) { justify-content: space-between; }
+        @media (min-width: 500px) { 
+            justify-content: space-between; 
+        }
+        @media (min-width: 800px) { 
+            justify-content: space-between; 
+        }
+        @media (min-width: var.$bp-large) { 
+            justify-content: space-between; 
+        }
     }
 
     &__actions {
@@ -113,7 +129,9 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.3s ease;
 
-    &:hover { transform: translateY(-5px); }
+    &:hover { 
+        transform: translateY(-5px); 
+    }
 
     .product-image-container {
         width: 100%;
