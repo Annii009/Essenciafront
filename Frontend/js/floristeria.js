@@ -1,3 +1,6 @@
+const API_BASE_URL = "http://localhost:8038";
+const normalizarImagen = ruta => ruta ? ruta.replace("..", "") : "";
+
 function createRandomGenerator(seed) {
     let state = seed;
     const m = 0x80000000;
@@ -10,14 +13,14 @@ function createRandomGenerator(seed) {
     };
 }
 
-function selectDailyProducts() {
+function selectDailyProducts(productos) {
     const today = new Date();
     const start = new Date(today.getFullYear(), 0, 0);
     const diff = today - start;
     const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
 
     const random = createRandomGenerator(dayOfYear);
-    const allProducts = [...apiEssencia.productos_floristeria];
+    const allProducts = [...productos];
     const dailyProducts = [];
 
     for (let i = 0; i < 3; i++) {
@@ -30,66 +33,60 @@ function selectDailyProducts() {
     return dailyProducts;
 }
 
-function renderTrending() {
+function renderTrending(productos) {
     const container = document.getElementById('trending-products');
-    const items = selectDailyProducts();
+    if (!container) return;
 
-    container.innerHTML = items
-        .map(producto => {
-            const priceDisplay = "5,99";
-            return `
-                <div class="trending-card">
-                    <div class="product-image-container">
-                        <img src="${producto.imagen}" alt="${producto.nombre}" 
-                             onerror="this.src='./imagenes/placeholder.jpg'">
-                    </div>
-                    <div class="product-info">
-                        <p class="product-name">Café colombia</p>
-                        <p class="product-desc">${producto.detalle}</p>
-                        <p class="product-price">${priceDisplay}€</p>
-                        <div class="product-actions">
-                            <button class="btn btn-primary">Ver</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        })
-        .join('');
-}
+    const items = selectDailyProducts(productos);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const trendingContainer = document.getElementById('trending-products');
-    
-    const trendingProducts = apiEssencia.productos_floristeria.slice(0, 3);
-
-    trendingContainer.innerHTML = trendingProducts.map(product => `
-        <a href="detalleFloristeria.html?id=${product.id}" class="trending-card">
+    container.innerHTML = items.map(producto => `
+        <div class="trending-card">
             <div class="product-image-container">
-                <img src="${product.imagen}" alt="${product.nombre}">
+                <img src="${normalizarImagen(producto.imagenRuta)}"
+                     alt="${producto.nombre}"
+                     onerror="this.src='./imagenes/placeholder.jpg'">
             </div>
             <div class="product-info">
-                <div class="product-name">${product.nombre}</div>
-                <div class="product-desc">${product.detalle}</div>
-                <div class="product-price">${product.precio_euros.toFixed(2)}€</div>
+                <p class="product-name">${producto.nombre}</p>
+                <p class="product-desc">${producto.detalle}</p>
+                <p class="product-price">${producto.precioEuros.toFixed(2).replace('.', ',')}€</p>
                 <div class="product-actions">
-                    <button class="btn btn--green">Ver detalle</button>
+                    <button class="btn btn-primary">Ver</button>
                 </div>
             </div>
-        </a>
+        </div>
     `).join('');
+}
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const trendingContainer = document.getElementById('trending-products');
     const scrollContainer = document.querySelector('.gallery__scroll');
     const leftBtn = document.getElementById('scroll-left');
     const rightBtn = document.getElementById('scroll-right');
 
-    if(leftBtn && rightBtn && scrollContainer) {
-        leftBtn.addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
-        });
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/ProductosFloristeria`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const productos = await res.json();
+        console.log("Floristería para trending:", productos);
 
-        rightBtn.addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
-        });
+        if (trendingContainer) {
+            renderTrending(productos);
+        }
+
+        if (scrollContainer && leftBtn && rightBtn) {
+            leftBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+
+            rightBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        }
+    } catch (err) {
+        console.error("Error cargando productos para trending:", err);
+        if (trendingContainer) {
+            trendingContainer.innerHTML = "<p>Error al cargar flores destacadas.</p>";
+        }
     }
 });
-
